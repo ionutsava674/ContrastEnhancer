@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContrastEnhancer", "Contras
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4B1C1477-E0F1-49CA-84F0-89AF3814749B}"
 	ProjectSection(SolutionItems) = preProject
-		docs\blackblank.png = docs\blackblank.png
+		docs\bbs.png = docs\bbs.png
 		index.md = index.md
 	EndProjectSection
 EndProject
