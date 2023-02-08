@@ -1,12 +1,13 @@
 # Contrast Enhancer
 
-### **Overview**
+## **Overview**
+<br />
 
 <div style="display: grid; align-items: left; grid-template-columns: 1fr 3fr; column-gap: 5px;">
 
 <img alt="App icon" src="docs/bbs.png" style="width: 220px;">
 
-Contrast-Enhancer is a windows application, written in C#. It is a tool with which you can take a snapshot of the current screen, and with easy mouse gestures, you can fine tune in real time several parameters of the image contrast.
+### Contrast-Enhancer is a windows application, written in C#. It is a tool with which you can take a snapshot of the current screen, and with easy mouse gestures, you can fine tune in real time several parameters of the image contrast.
 
 </div>
 
