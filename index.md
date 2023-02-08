@@ -2,7 +2,7 @@
 
 ### **Overview**
 
-<div style="display: grid; align-items: left; grid-template-columns: 1fr 1fr 1fr; column-gap: 5px;">
+<div style="display: grid; align-items: left; grid-template-columns: 1fr 3fr; column-gap: 5px;">
 
 <img alt="App icon" src="docs/bbs.png" style="width: 220px;">
 
