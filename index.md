@@ -10,7 +10,7 @@
 
 #### How to use
 
-ÿou can control the contrast parameters like this
+ÿou can control the contrast parameters like this\:
 
 1. hold down the control key and the left mouse button.
 
@@ -19,7 +19,7 @@ the contrast threshold can be between 0 and 100% of the image luminosity. It wil
 
 3. drag up or down, to adjust the amplitude. The further you drag, the higher the contrast.
 
-tip: start dragging from the center of the screen.
+tip\: start dragging from the center of the screen.
 
 press M to move the mouse cursor to the center of the screen.
 
