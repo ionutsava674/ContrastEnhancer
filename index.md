@@ -30,11 +30,11 @@ you can scroll by holding the left mouse button and dragging.
 
 press Space to refresh the screenshot.
 
-press win+shift + A to hide the window.
+press win shift A to hide the window.
 
-after hiding, press win+shift + A to show it. The screenshot will not be updated.
+after hiding, press win shift A to show it. The screenshot will not be updated.
 
-after hiding, press shift+alt + A to show it and update the screenshot.
+after hiding, press shift alt A to show it and update the screenshot.
 
 press X to invert the colors.
 
@@ -42,7 +42,7 @@ press C to toggle the mouse cursor crosshairs.
 
 press B to toggle the crosshairs border.
 
-press ALT + Q to quit.
+press ALT Q to quit.
 
 --
 
