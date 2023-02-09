@@ -12,12 +12,13 @@
 
 ÿou can control the contrast parameters like this
 
-- hold down the control key and the left mouse button.
+hold down the control key and the left mouse button.
 
-- drag left or right, to adjust the threshhold point.
+drag left or right, to adjust the threshhold point.
+
 the contrast threshold can be between 0 and 100% of the image luminosity. It will be set to the cursor position relative to the screen edges.
 
-- drag up or down, to adjust the amplitude. The further you drag, the higher the contrast.
+drag up or down, to adjust the amplitude. The further you drag, the higher the contrast.
 
 tip, start dragging from the center of the screen.
 
