@@ -18,6 +18,8 @@ namespace ContrastEnhancer
             public static extern int RegisterHotKey(IntPtr hwnd, int id, int fsModifiers, int vk);
             [DllImport("user32.dll")]
             public static extern int UnregisterHotKey(IntPtr hwnd, int id);
+            [DllImport("user32.dll")]
+            public static extern bool SetCursorPos(int x, int y);
 
             public const int MOD_ALT = 0x0001;
             public const int MOD_CONTROL = 0x0002;
@@ -55,6 +57,7 @@ namespace ContrastEnhancer
         private char crossHairKey = 'C';
         private char crossHairBorderKey = 'B';
         private char invertKey = 'X';
+        private char centerCursorKey = 'M';
         private string settingsFilePathName = AppDomain.CurrentDomain.BaseDirectory + "ce_settings.ini";
 
         private bool readSettings() {
@@ -115,6 +118,11 @@ namespace ContrastEnhancer
             } //gua
             char tempInvertKey = v[0];
 
+            if (!dict.TryGetValue("centerCursorKey", out v) || (v.Length < 1)) {
+                return false;
+            } //gua
+            char tempCenterCursorKey = v[0];
+
             showHideKey = tempShowHideKey;
             showHideModifier = tempShowHideModifier;
             refreshKey = tempRefreshKey;
@@ -122,6 +130,7 @@ namespace ContrastEnhancer
             crossHairKey = tempCrossHairKey;
             crossHairBorderKey = tempCrossHairBorderKey;
             invertKey = tempInvertKey;
+            centerCursorKey = tempCenterCursorKey;
 
             return true;
         } //func
@@ -132,6 +141,7 @@ namespace ContrastEnhancer
             data.Add("refreshKey=" + refreshKey);
             data.Add("refreshModifier=" + modifierToString(refreshModifier));
             data.Add("invertKey=" + invertKey);
+            data.Add("centerCursorKey=" + centerCursorKey);
             data.Add("crossHairKey=" + crossHairKey);
             data.Add("crossHairBorderKey=" + crossHairBorderKey);
             try {
@@ -460,32 +470,28 @@ namespace ContrastEnhancer
             rk2=0;
             }
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == (int)Keys.F4 && ModifierKeys.HasFlag(Keys.Alt))
-            {
+        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyValue == (int)Keys.F4 && ModifierKeys.HasFlag(Keys.Alt)) {
                 e.SuppressKeyPress=true;
                 e.Handled = true;
-            }
+            } //fi
             if (e.KeyValue == crossHairKey) {
                 crossHairs ++;
                 crossHairs %= 2;
                 Invalidate();
                 return;
-            }
+            } //fi
             if (e.KeyValue == crossHairBorderKey) {
                 crohaBorder++;
                 crohaBorder %= 2;
                 Invalidate();
                 return;
-            }
-            if (e.KeyValue == 'Q' && ModifierKeys.HasFlag(Keys.Alt))
-            {
+            } //fi
+            if (e.KeyValue == 'Q' && ModifierKeys.HasFlag(Keys.Alt)) {
                 Close();
                 return;
-            }
-                if (e.KeyValue == 191)
-            {
+            } //fi
+                if (e.KeyValue == 191) {
                 zoomRect = new Rectangle(ss.Left, ss.Top, ss.Width, ss.Height);
                 //ApplyFilters_b0b2();
                 //ApplyZoom();
@@ -493,13 +499,43 @@ namespace ContrastEnhancer
                 g2.DrawImage(b1, ss, zoomRect, GraphicsUnit.Pixel);
                 Invalidate();
                 return;
-            }
-            if (e.KeyValue==invertKey) {
+            } //fi
+            if (e.KeyValue == invertKey) {
                 lastInverted = !lastInverted;
                 ApplyFilters_b0b2();
                 Invalidate();
                 return;
-            }
+            } //fi
+            if (e.KeyValue == centerCursorKey) {
+                RegHK.SetCursorPos(ss.Left + ss.Width / 2, ss.Top + ss.Height / 2);
+                Invalidate();
+                return;
+            } //fi
+            if (e.KeyValue == '\r') {
+                MessageBox.Show(compileHelp());
+                return;
+            } //fi
+        } //func
+        private string compileHelp() {
+            var lines = new List<string>();
+            lines.Add("ÿou can control the contrast parameters like this:");
+            lines.Add("1. hold down the control key and the left mouse button.");
+            lines.Add("2. drag left or right, to adjust the threshhold point.");
+            lines.Add("the contrast threshold can be between 0 and 100% of the image luminosity. It will be set to the cursor position relative to the screen edges.");
+            lines.Add("3. drag up or down, to adjust the amplitude. The further you drag, the higher the contrast.");
+            lines.Add("tip: start dragging from the center of the screen.");
+            lines.Add($"press {centerCursorKey} to move the mouse cursor to the center of the screen.");
+            lines.Add("You can zoom in and out using the middle and right mouse buttons.");
+            lines.Add("you can scroll by holding the left mouse button and dragging.");
+            lines.Add($"press Space to refresh the screenshot.");
+            lines.Add($"press {modifierToString(showHideModifier)} + {showHideKey} to hide the window.");
+            lines.Add($"after hiding, press {modifierToString(showHideModifier)} + {showHideKey} to show it. The screenshot will not be updated.");
+            lines.Add($"after hiding, press {modifierToString(refreshModifier)} + {refreshKey} to show it and update the screenshot.");
+            lines.Add($"press {invertKey} to invert the colors.");
+            lines.Add($"press {crossHairKey} to toggle the mouse cursor crosshairs.");
+            lines.Add($"press {crossHairBorderKey} to toggle the crosshairs border.");
+            lines.Add("press ALT + Q to quit.");
+            return string.Join("\r\n", lines);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
