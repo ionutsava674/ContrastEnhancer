@@ -10,7 +10,38 @@
 
 #### How to use
 
-ÿou can control the contrast parameters like this:
+ÿou can control the contrast parameters like this
+
+1. hold down the control key and the left mouse button.
+
+2. drag left or right, to adjust the threshhold point.
+the contrast threshold can be between 0 and 100% of the image luminosity. It will be set to the cursor position relative to the screen edges.
+
+3. drag up or down, to adjust the amplitude. The further you drag, the higher the contrast.
+
+tip: start dragging from the center of the screen.
+
+press M to move the mouse cursor to the center of the screen.
+
+You can zoom in and out using the middle and right mouse buttons.
+
+you can scroll by holding the left mouse button and dragging.
+
+press Space to refresh the screenshot.
+
+press win+shift + A to hide the window.
+
+after hiding, press win+shift + A to show it. The screenshot will not be updated.
+
+after hiding, press shift+alt + A to show it and update the screenshot.
+
+press X to invert the colors.
+
+press C to toggle the mouse cursor crosshairs.
+
+press B to toggle the crosshairs border.
+
+press ALT + Q to quit.
 
 --
 
