@@ -4,7 +4,7 @@
 <br />
 
 <div style="display: grid; align-items: left; grid-template-columns: 1fr 3fr; column-gap: 5px;">
-<img alt="App icon" src="docs/mac128x128.png" style="width: 220px;">
+<img alt="Q App icon" src="docs/mac128x128.png" style="width: 220px;">
 <h3>Contrast-Enhancer is a windows application, written in C#. It is a tool with which you can take a snapshot of the current screen, and with easy mouse gestures, you can fine tune in real time several parameters of the image contrast.</h3>
 </div>
 
