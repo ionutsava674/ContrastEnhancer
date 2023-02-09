@@ -8,6 +8,8 @@
 <h3>Contrast-Enhancer is a windows application, written in C#. It is a tool with which you can take a snapshot of the current screen, and with easy mouse gestures, you can fine tune in real time several parameters of the image contrast.</h3>
 </div>
 
+#### How to use
+
 ÿou can control the contrast parameters like this:
 
 1. hold down the control key and the left mouse button.
