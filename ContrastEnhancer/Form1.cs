@@ -60,6 +60,9 @@ namespace ContrastEnhancer
         private char centerCursorKey = 'M';
         private string settingsFilePathName = AppDomain.CurrentDomain.BaseDirectory + "ce_settings.ini";
 
+        private bool firstSettingsFound = false;
+        private bool firstHelpShown = false;
+
         private bool readSettings() {
             string[] lines = new string[] { };
             try {
@@ -171,7 +174,7 @@ namespace ContrastEnhancer
         {
             ccanshow = true;
             InitializeComponent();
-            if(!readSettings()) {
+            if(!( firstSettingsFound = readSettings() )) {
                 saveDefaultSettings();
             }
             rk1 = RegHK.RegisterHotKey(Handle, 1, showHideModifier, showHideKey);
@@ -427,13 +430,11 @@ namespace ContrastEnhancer
             Graphics g2 = Graphics.FromImage(b2);
             g2.DrawImage(b1, ss, zoomRect, GraphicsUnit.Pixel);
         }
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == 32)
-            {
+        private void Form1_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyValue == 32) {
                 reCapture();
-            }
-        }
+            } //fi
+        } //func
         private void PlaceWindow()
         {
             this.FormBorderStyle = FormBorderStyle.None;
@@ -511,13 +512,18 @@ namespace ContrastEnhancer
                 Invalidate();
                 return;
             } //fi
-            if (e.KeyValue == '\r') {
-                MessageBox.Show(compileHelp());
+            if (e.KeyValue == '\r' || e.KeyValue == 'H') {
+                showHelp();
                 return;
             } //fi
         } //func
+        private void showHelp() {
+            MessageBox.Show(compileHelp());
+        } //func
         private string compileHelp() {
             var lines = new List<string>();
+            //lines.Add($"set {firstSettingsFound}, sh {firstHelpShown}.");
+            lines.Add("press H, or ENTER, to show this help.");
             lines.Add("ÿou can control the contrast parameters like this:");
             lines.Add("1. hold down the control key and the left mouse button.");
             lines.Add("2. drag left or right, to adjust the threshhold point.");
@@ -538,18 +544,17 @@ namespace ContrastEnhancer
             return string.Join("\r\n", lines);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ;
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            //;
+        } //func
+        private void Form1_Load(object sender, EventArgs e) {
             //MessageBox.Show("load");
-            this.Text = ss.Width.ToString() + " " + ss.Height;
+            //this.Text = ss.Width.ToString() + " " + ss.Height;
+            this.Text = "fine tune the contrast";
             PlaceWindow();
             ApplyFilters_b0b2();
             PlaceImage();
-        }
+        } //func
         private void toggleVisible()
         {
             ccanshow = true;
@@ -568,6 +573,14 @@ namespace ContrastEnhancer
             base.WndProc(ref m);
         }
         protected bool ccanshow = false;
+
+        private void Form1_Shown(object sender, EventArgs e) {
+            if(!firstSettingsFound && !firstHelpShown) {
+                firstHelpShown = true;
+                showHelp();
+            }
+        } //func
+
         protected override void SetVisibleCore(bool value)
         {
             //MessageBox.Show("" + Visible+" "+value);
